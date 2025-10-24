@@ -1,4 +1,6 @@
-Cyberpunk System Monitor 🖥️⚡
+## Cyberpunk System Monitor 🖥️⚡
+
+### Coming soon: For normal linux, not git bash...
 
 A beautiful, cyberpunk-themed system monitor for Windows with ASCII art and neon colors.
 Features
