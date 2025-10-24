@@ -56,7 +56,7 @@ display_metrics() {
     echo -e "${BRIGHT_CYAN}║${NC}${BRIGHT_RED}   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ${NC}${BRIGHT_CYAN}      ║${NC}"
     echo -e "${BRIGHT_CYAN}║${NC}${CYAN}        SYSTEM STATUS: ${BRIGHT_GREEN}OPERATIONAL${NC}${CYAN} | MODE: ${BRIGHT_GREEN}REAL-TIME${NC}${CYAN} | GRID: ${BRIGHT_GREEN}ONLINE${NC}         ${BRIGHT_CYAN}  ║${NC}"
     echo -e "${BRIGHT_CYAN}╚══════════════════════════════════════════════════════════════════════════════╝${NC}"
-    echo -e "${YELLOW}   Press CTRL+C to disconnect from matrix${NC}"
+    echo -e "${YELLOW}   Press Q and RETURN to exit after the loop${NC}"
 }
 
 # Main loop
@@ -75,8 +75,15 @@ while true; do
     # Display immediately with potentially cached values
     display_metrics
     
+    # Check for 'q' key press with short timeout
+    read -r -t 0.5 -n1 key && [[ $key == "q" ]] && break
+    
     # Wait for the background update to complete
     wait $SYSTEM_PID 2>/dev/null
     
     sleep $interval
 done
+
+echo -e "\n${BRIGHT_RED}Disconnecting from system matrix...${NC}"
+sleep 1
+clear
